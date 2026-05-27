@@ -45,6 +45,7 @@ const DEMO_POSTCARDS: Postcard[] = [
 export function usePostcards() {
   const [postcards, setPostcards] = useState<Postcard[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isFirebaseConfigured()) {
@@ -53,13 +54,20 @@ export function usePostcards() {
       return;
     }
 
-    const unsubscribe = subscribeToPostcards((data) => {
-      setPostcards(data);
-      setLoading(false);
-    });
+    const unsubscribe = subscribeToPostcards(
+      (data) => {
+        setPostcards(data);
+        setLoading(false);
+        setError(null);
+      },
+      (err) => {
+        setError(err.message);
+        setLoading(false);
+      }
+    );
 
     return () => unsubscribe();
   }, []);
 
-  return { postcards, loading };
+  return { postcards, loading, error };
 }

@@ -4,9 +4,10 @@ import type { Postcard } from "../types";
 interface PostcardWallProps {
   postcards: Postcard[];
   loading: boolean;
+  error?: string | null;
 }
 
-export default function PostcardWall({ postcards, loading }: PostcardWallProps) {
+export default function PostcardWall({ postcards, loading, error }: PostcardWallProps) {
   return (
     <section className="postcard-wall">
       <h2 className="wall-title">The Postcard Wall</h2>
@@ -14,7 +15,14 @@ export default function PostcardWall({ postcards, loading }: PostcardWallProps) 
         Click any card to flip it over and read the message 💌
       </p>
 
-      {loading ? (
+      {error ? (
+        <div className="wall-empty">
+          <p>⚠️ Couldn't load postcards: {error}</p>
+          <p style={{ fontSize: "1rem", marginTop: "1rem" }}>
+            (This usually means Firestore rules need updating — see README)
+          </p>
+        </div>
+      ) : loading ? (
         <div className="wall-loading">
           <span className="loading-spinner">🍼</span>
           <p>Loading postcards...</p>

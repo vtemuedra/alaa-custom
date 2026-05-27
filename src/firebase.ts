@@ -49,17 +49,25 @@ export async function addPostcard(
 }
 
 export function subscribeToPostcards(
-  callback: (postcards: Postcard[]) => void
+  callback: (postcards: Postcard[]) => void,
+  onError?: (error: Error) => void
 ) {
   const q = query(postcardsCollection, orderBy("createdAt", "desc"));
-  return onSnapshot(q, (snapshot) => {
-    const postcards = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-      createdAt: doc.data().createdAt?.toMillis?.() ?? Date.now(),
-    })) as Postcard[];
-    callback(postcards);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const postcards = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        createdAt: doc.data().createdAt?.toMillis?.() ?? Date.now(),
+      })) as Postcard[];
+      callback(postcards);
+    },
+    (error) => {
+      console.error("Firestore subscription error:", error);
+      onError?.(error);
+    }
+  );
 }
 
 export function isFirebaseConfigured(): boolean {

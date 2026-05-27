@@ -7,13 +7,13 @@ import { usePostcards } from "./hooks/usePostcards";
 import "./App.css";
 
 export default function App() {
-  const { postcards, loading } = usePostcards();
+  const { postcards, loading, error } = usePostcards();
 
   return (
     <div className="app">
       <Hero />
       <TransitionSection />
-      <PostcardWall postcards={postcards} loading={loading} />
+      <PostcardWall postcards={postcards} loading={loading} error={error} />
       <PostcardForm />
       <Footer />
     </div>
