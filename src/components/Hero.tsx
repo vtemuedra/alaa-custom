@@ -83,7 +83,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 1, type: "spring", bounce: 0.3 }}
         >
-          Placeholder Name For Baby
+          Moussa
         </motion.h1>
 
         <motion.p
@@ -103,7 +103,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.8 }}
         >
-          Congratulations Alaa & Partner Placeholder! 🎉
+          Congratulations Alaa & Dinah! 🎉
         </motion.div>
       </motion.div>
 

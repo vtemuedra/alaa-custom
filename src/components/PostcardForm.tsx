@@ -133,7 +133,7 @@ export default function PostcardForm() {
                     Write your postcard ✍️
                   </h3>
                   <p className="modal-subtitle">
-                    For Alaa, Partner Placeholder & baby Placeholder Name For Baby
+                    For Alaa, Dinah & baby Moussa
                   </p>
 
                   <form onSubmit={handleSubmit} className="postcard-form">
