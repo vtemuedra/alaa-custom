@@ -6,7 +6,6 @@ import {
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -34,17 +33,23 @@ const postcardsCollection = collection(db, "postcards");
 export async function uploadImage(file: File): Promise<string> {
   const filename = `postcards/${Date.now()}-${file.name}`;
   const storageRef = ref(storage, filename);
+  console.log("[Firebase] Uploading image:", filename);
   await uploadBytes(storageRef, file);
-  return getDownloadURL(storageRef);
+  const url = await getDownloadURL(storageRef);
+  console.log("[Firebase] Image uploaded, URL:", url);
+  return url;
 }
 
 export async function addPostcard(
   data: Omit<Postcard, "id" | "createdAt">
 ): Promise<string> {
-  const docRef = await addDoc(postcardsCollection, {
+  const payload = {
     ...data,
-    createdAt: serverTimestamp(),
-  });
+    createdAt: Date.now(), // plain number — simpler than serverTimestamp
+  };
+  console.log("[Firebase] Writing postcard to Firestore:", payload);
+  const docRef = await addDoc(postcardsCollection, payload);
+  console.log("[Firebase] Postcard written, doc ID:", docRef.id);
   return docRef.id;
 }
 
@@ -53,18 +58,19 @@ export function subscribeToPostcards(
   onError?: (error: Error) => void
 ) {
   const q = query(postcardsCollection, orderBy("createdAt", "desc"));
+  console.log("[Firebase] Subscribing to postcards...");
   return onSnapshot(
     q,
     (snapshot) => {
+      console.log("[Firebase] Snapshot received, docs:", snapshot.docs.length);
       const postcards = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-        createdAt: doc.data().createdAt?.toMillis?.() ?? Date.now(),
       })) as Postcard[];
       callback(postcards);
     },
     (error) => {
-      console.error("Firestore subscription error:", error);
+      console.error("[Firebase] Firestore error:", error.code, error.message);
       onError?.(error);
     }
   );
