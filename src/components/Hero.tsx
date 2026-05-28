@@ -94,7 +94,7 @@ export default function Hero() {
         >
           A little collection of love from the
           <br />
-          <strong>MAI Monetization Inventory Team</strong>
+          <strong>your team at MAI</strong>
         </motion.p>
 
         <motion.div

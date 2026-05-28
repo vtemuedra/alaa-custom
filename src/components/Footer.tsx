@@ -5,7 +5,7 @@ export default function Footer() {
         Congratulations Alaa & Dinah! 🍼
       </p>
       <p className="footer-credit">
-        Made with ❤️ by the <strong>MAI Monetization Inventory Team</strong>
+        Made with ❤️ by <strong>your team at MAI</strong>
       </p>
     </footer>
   );
