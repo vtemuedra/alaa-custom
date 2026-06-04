@@ -74,18 +74,18 @@ export default function PostcardCard({
               <span className="postcard-dash">—</span>
               <span className="postcard-signer">{name}</span>
             </div>
-            <div className="postcard-actions">
-              <button
-                type="button"
-                className="postcard-delete-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  void onDelete();
-                }}
-              >
-                Delete
-              </button>
-            </div>
+          </div>
+          <div className="postcard-actions">
+            <button
+              type="button"
+              className="postcard-delete-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                void onDelete();
+              }}
+            >
+              Delete
+            </button>
           </div>
           <span className="postcard-tap-hint back-hint">tap to flip back</span>
         </div>

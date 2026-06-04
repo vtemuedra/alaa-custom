@@ -328,6 +328,7 @@ body {
 
 /* --- BACK (message side) --- */
 .postcard-back {
+  position: relative;
   transform: rotateY(180deg);
   background: var(--cream);
   box-shadow:
@@ -385,7 +386,10 @@ body {
 }
 
 .postcard-actions {
-  margin-top: 1rem;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1;
 }
 
 .postcard-delete-btn {
