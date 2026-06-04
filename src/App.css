@@ -339,7 +339,8 @@ body {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-bottom: 56px;
   /* Postcard line pattern */
   background-image: repeating-linear-gradient(
     transparent,
@@ -352,6 +353,11 @@ body {
 
 .postcard-back-content {
   position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
 }
 
 .postcard-stamp {
