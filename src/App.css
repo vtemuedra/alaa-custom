@@ -252,12 +252,14 @@ body {
 .postcard-wrapper {
   perspective: 1200px;
   cursor: pointer;
+  width: 100%;
+  aspect-ratio: 4 / 5;
 }
 
 .postcard-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 4px;
@@ -336,7 +338,8 @@ body {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-bottom: 56px;
   /* Postcard line pattern */
   background-image: repeating-linear-gradient(
     transparent,
@@ -349,6 +352,11 @@ body {
 
 .postcard-back-content {
   position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
 }
 
 .postcard-stamp {
@@ -382,6 +390,24 @@ body {
   font-family: var(--font-signature);
   font-size: 1.5rem;
   color: var(--text);
+}
+
+.postcard-actions {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1;
+}
+
+.postcard-delete-btn {
+  border: 1px solid #d29a9a;
+  background: #fff3f3;
+  color: #7a2f2f;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
 }
 
 .back-hint {
@@ -653,7 +679,7 @@ body {
     gap: 2rem;
   }
 
-  .postcard-card {
+  .postcard-wrapper {
     aspect-ratio: 3 / 4;
   }
 

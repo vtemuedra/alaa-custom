@@ -5,9 +5,15 @@ interface PostcardWallProps {
   postcards: Postcard[];
   loading: boolean;
   error?: string | null;
+  onDeletePostcard: (id: string) => Promise<void>;
 }
 
-export default function PostcardWall({ postcards, loading, error }: PostcardWallProps) {
+export default function PostcardWall({
+  postcards,
+  loading,
+  error,
+  onDeletePostcard,
+}: PostcardWallProps) {
   return (
     <section className="postcard-wall">
       <h2 className="wall-title">The Postcard Wall</h2>
@@ -40,6 +46,7 @@ export default function PostcardWall({ postcards, loading, error }: PostcardWall
               message={postcard.message}
               imageUrl={postcard.imageUrl}
               index={index}
+              onDelete={() => onDeletePostcard(postcard.id)}
             />
           ))}
         </div>

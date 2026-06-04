@@ -3,6 +3,8 @@ import {
   getFirestore,
   collection,
   addDoc,
+  deleteDoc,
+  doc,
   onSnapshot,
   query,
   orderBy,
@@ -74,6 +76,11 @@ export function subscribeToPostcards(
       onError?.(error);
     }
   );
+}
+
+export async function deletePostcard(id: string): Promise<void> {
+  console.log("[Firebase] Deleting postcard:", id);
+  await deleteDoc(doc(postcardsCollection, id));
 }
 
 export function isFirebaseConfigured(): boolean {

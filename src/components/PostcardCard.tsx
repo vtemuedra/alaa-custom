@@ -6,6 +6,7 @@ interface PostcardCardProps {
   message: string;
   imageUrl: string;
   index: number;
+  onDelete: () => Promise<void>;
 }
 
 export default function PostcardCard({
@@ -13,6 +14,7 @@ export default function PostcardCard({
   message,
   imageUrl,
   index,
+  onDelete,
 }: PostcardCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -72,6 +74,18 @@ export default function PostcardCard({
               <span className="postcard-dash">—</span>
               <span className="postcard-signer">{name}</span>
             </div>
+          </div>
+          <div className="postcard-actions">
+            <button
+              type="button"
+              className="postcard-delete-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                void onDelete();
+              }}
+            >
+              Delete
+            </button>
           </div>
           <span className="postcard-tap-hint back-hint">tap to flip back</span>
         </div>
