@@ -127,16 +127,16 @@ export default function PostcardCard({
         </div>
       </div>
 
-      <AnimatePresence>
-        {confirmOpen &&
-          createPortal(
+      {createPortal(
+        <AnimatePresence>
+          {confirmOpen && (
             <motion.div
+              key="confirm-overlay"
               className="modal-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={(e) => {
-                e.stopPropagation();
                 if (e.target === e.currentTarget) setConfirmOpen(false);
               }}
             >
@@ -149,7 +149,6 @@ export default function PostcardCard({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 40, scale: 0.9 }}
                 transition={{ type: "spring", bounce: 0.3 }}
-                onClick={(e) => e.stopPropagation()}
               >
                 <h3
                   id={`confirm-delete-title-${name}`}
@@ -158,8 +157,8 @@ export default function PostcardCard({
                   Delete this postcard?
                 </h3>
                 <p className="modal-subtitle confirm-dialog-message">
-                  Are you sure you want to remove {name}'s postcard? This can't
-                  be undone.
+                  Are you sure you want to remove {name}'s postcard? This
+                  can't be undone.
                 </p>
                 <div className="confirm-dialog-actions">
                   <button
@@ -179,10 +178,11 @@ export default function PostcardCard({
                   </button>
                 </div>
               </motion.div>
-            </motion.div>,
-            document.body
+            </motion.div>
           )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </motion.div>
   );
 }
