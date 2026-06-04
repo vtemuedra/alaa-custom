@@ -92,7 +92,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
         >
-          A little collection of love from the
+          A little collection of love from
           <br />
           <strong>your team at MAI</strong>
         </motion.p>
