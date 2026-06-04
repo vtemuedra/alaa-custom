@@ -252,12 +252,14 @@ body {
 .postcard-wrapper {
   perspective: 1200px;
   cursor: pointer;
+  width: 100%;
+  aspect-ratio: 4 / 5;
 }
 
 .postcard-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 4px;
@@ -672,7 +674,7 @@ body {
     gap: 2rem;
   }
 
-  .postcard-card {
+  .postcard-wrapper {
     aspect-ratio: 3 / 4;
   }
 
