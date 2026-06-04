@@ -330,7 +330,6 @@ body {
 
 /* --- BACK (message side) --- */
 .postcard-back {
-  position: relative;
   transform: rotateY(180deg);
   background: var(--cream);
   box-shadow:
