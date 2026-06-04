@@ -85,6 +85,7 @@ export function usePostcards() {
     } catch (err) {
       console.error("[Postcards] Delete failed:", err);
       alert("Couldn't delete postcard. Please check Firestore rules and try again.");
+      throw err;
     }
   };
 

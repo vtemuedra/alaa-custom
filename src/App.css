@@ -416,6 +416,62 @@ body {
   padding-top: 0.5rem;
 }
 
+.confirm-dialog {
+  max-width: 420px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.confirm-dialog-title {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.confirm-dialog-message {
+  font-size: 1.1rem;
+  margin-bottom: 1.75rem;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.confirm-dialog-cancel,
+.confirm-dialog-confirm {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.confirm-dialog-cancel {
+  background: transparent;
+  border-color: var(--text-light);
+  color: var(--text);
+}
+
+.confirm-dialog-cancel:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.confirm-dialog-confirm {
+  background: linear-gradient(135deg, #d96b6b, #b84a4a);
+  color: white;
+  border-color: #a23e3e;
+}
+
+.confirm-dialog-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(184, 74, 74, 0.35);
+}
+
 /* ============================================================
    FORM SECTION & MODAL
    ============================================================ */

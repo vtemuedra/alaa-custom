@@ -1,3 +1,4 @@
+import { AnimatePresence } from "motion/react";
 import PostcardCard from "./PostcardCard";
 import type { Postcard } from "../types";
 
@@ -39,16 +40,18 @@ export default function PostcardWall({
         </div>
       ) : (
         <div className="wall-grid">
-          {postcards.map((postcard, index) => (
-            <PostcardCard
-              key={postcard.id}
-              name={postcard.name}
-              message={postcard.message}
-              imageUrl={postcard.imageUrl}
-              index={index}
-              onDelete={() => onDeletePostcard(postcard.id)}
-            />
-          ))}
+          <AnimatePresence>
+            {postcards.map((postcard, index) => (
+              <PostcardCard
+                key={postcard.id}
+                name={postcard.name}
+                message={postcard.message}
+                imageUrl={postcard.imageUrl}
+                index={index}
+                onDelete={() => onDeletePostcard(postcard.id)}
+              />
+            ))}
+          </AnimatePresence>
         </div>
       )}
     </section>
