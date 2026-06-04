@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { subscribeToPostcards, isFirebaseConfigured } from "../firebase";
+import {
+  subscribeToPostcards,
+  isFirebaseConfigured,
+  deletePostcard,
+} from "../firebase";
 import type { Postcard } from "../types";
 
 // Demo postcards shown when Firebase is not configured
@@ -43,14 +47,15 @@ const DEMO_POSTCARDS: Postcard[] = [
 ];
 
 export function usePostcards() {
-  const [postcards, setPostcards] = useState<Postcard[]>([]);
-  const [loading, setLoading] = useState(true);
+  const firebaseConfigured = isFirebaseConfigured();
+  const [postcards, setPostcards] = useState<Postcard[]>(() =>
+    firebaseConfigured ? [] : DEMO_POSTCARDS
+  );
+  const [loading, setLoading] = useState(firebaseConfigured);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isFirebaseConfigured()) {
-      setPostcards(DEMO_POSTCARDS);
-      setLoading(false);
+    if (!firebaseConfigured) {
       return;
     }
 
@@ -67,7 +72,20 @@ export function usePostcards() {
     );
 
     return () => unsubscribe();
-  }, []);
+  }, [firebaseConfigured]);
 
-  return { postcards, loading, error };
+  const removePostcard = async (id: string) => {
+    if (!firebaseConfigured) {
+      setPostcards((current) => current.filter((postcard) => postcard.id !== id));
+      return;
+    }
+
+    try {
+      await deletePostcard(id);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete postcard");
+    }
+  };
+
+  return { postcards, loading, error, removePostcard };
 }

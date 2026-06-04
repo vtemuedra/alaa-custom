@@ -384,6 +384,21 @@ body {
   color: var(--text);
 }
 
+.postcard-actions {
+  margin-top: 1rem;
+}
+
+.postcard-delete-btn {
+  border: 1px solid #d29a9a;
+  background: #fff3f3;
+  color: #7a2f2f;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+
 .back-hint {
   align-self: center;
   margin-top: auto;
